@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">fragmentActivityDemo</string>
+    <string name="press_again_exit">Press again to exit</string>
+</resources>
