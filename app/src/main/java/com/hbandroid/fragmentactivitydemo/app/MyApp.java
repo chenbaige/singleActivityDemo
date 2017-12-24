@@ -3,6 +3,10 @@ package com.hbandroid.fragmentactivitydemo.app;
 import android.app.Application;
 
 import com.hbandroid.fragmentactivitydemo.BuildConfig;
+import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
+import com.hbandroid.fragmentactivitydemo.di.component.DaggerAppComponent;
+import com.hbandroid.fragmentactivitydemo.di.module.AppModule;
+import com.hbandroid.fragmentactivitydemo.di.module.HttpModule;
 
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
@@ -19,9 +23,14 @@ import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 public class MyApp extends Application {
 
+    private AppComponent mAppComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).httpModule(new HttpModule()).build();
+
         // 建议在Application里初始化
         Fragmentation.builder()
                 // 显示悬浮球 ; 其他Mode:SHAKE: 摇一摇唤出   NONE：隐藏
@@ -36,5 +45,9 @@ public class MyApp extends Application {
                     }
                 })
                 .install();
+    }
+
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 }

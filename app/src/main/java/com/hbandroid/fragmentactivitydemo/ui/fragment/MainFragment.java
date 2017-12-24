@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.hbandroid.fragmentactivitydemo.R;
-import com.hbandroid.fragmentactivitydemo.listener.OnChangeActivityStatusListener;
+import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.fragment.chat.ChatFragment;
 import com.hbandroid.fragmentactivitydemo.ui.fragment.favorite.FavoriteFragment;

@@ -8,8 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hbandroid.fragmentactivitydemo.listener.OnChangeActivityStatusListener;
-import com.hbandroid.fragmentactivitydemo.listener.OnFragmentHandleActivityClickListener;
+import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
+import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.fragment.MainFragment;
 

@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
-import com.hbandroid.fragmentactivitydemo.listener.OnChangeActivityStatusListener;
-import com.hbandroid.fragmentactivitydemo.listener.OnFragmentHandleActivityClickListener;
+import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
+import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
