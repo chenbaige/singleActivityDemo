@@ -1,7 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.di.component;
 
 import com.hbandroid.fragmentactivitydemo.di.FragmentScope;
-import com.hbandroid.fragmentactivitydemo.ui.fragment.home.HomeFragment;
+import com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.home.HomeFragment;
 
 import dagger.Component;
 

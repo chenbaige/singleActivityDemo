@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
-import com.hbandroid.fragmentactivitydemo.ui.fragment.MainFragment;
+import com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.MainFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

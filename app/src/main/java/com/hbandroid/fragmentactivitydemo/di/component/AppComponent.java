@@ -4,7 +4,7 @@ import com.hbandroid.fragmentactivitydemo.app.MyApp;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 import com.hbandroid.fragmentactivitydemo.di.module.AppModule;
 import com.hbandroid.fragmentactivitydemo.di.module.HttpModule;
-import com.hbandroid.fragmentactivitydemo.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
 
 import javax.inject.Singleton;
 

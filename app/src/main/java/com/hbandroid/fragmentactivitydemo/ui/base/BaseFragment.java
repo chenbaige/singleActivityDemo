@@ -11,8 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
+import com.hbandroid.fragmentactivitydemo.app.MyApp;
+import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,7 +37,20 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Date：2017-12-22
  */
 
-public abstract class BaseFragment extends Fragment implements ISupportFragment, OnFragmentHandleActivityClickListener {
+public abstract class BaseFragment<T extends IPresenter> extends Fragment implements ISupportFragment, OnFragmentHandleActivityClickListener, IView {
+
+    /**
+     * 依赖注入的入口
+     *
+     * @paramappComponent
+     */
+    protected abstract void setupActivityComponent(AppComponent appComponent);
+
+    @Inject
+    protected MyApp myApp;
+
+    @Inject
+    protected T mPresenter;
 
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
@@ -59,12 +76,17 @@ public abstract class BaseFragment extends Fragment implements ISupportFragment,
         View view = LayoutInflater.from(mContext).inflate(setContentViewId(), null, false);
         //绑定fragment
         unbinder = ButterKnife.bind(this, view);
+        if (null == myApp)
+            myApp = (MyApp) _mActivity.getApplication();
+        setupActivityComponent(myApp.getAppComponent());
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (mPresenter != null)
+            mPresenter.attachView(this);
         init();
     }
 
@@ -143,6 +165,7 @@ public abstract class BaseFragment extends Fragment implements ISupportFragment,
     public void onDestroy() {
         mDelegate.onDestroy();
         unbinder.unbind();
+        if (mPresenter != null) mPresenter.detachView();
         super.onDestroy();
     }
 
