@@ -77,7 +77,7 @@ public class RXResponseCompat {
                             return Observable.error(new Exception(tResponseListEntity.getMsg()));
                         }
                     }
-                });
+                }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
             }
         };
     }
@@ -105,7 +105,7 @@ public class RXResponseCompat {
                             return Observable.error(new Exception(tResponseListEntity.getMsg()));
                         }
                     }
-                });
+                }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
             }
         };
     }

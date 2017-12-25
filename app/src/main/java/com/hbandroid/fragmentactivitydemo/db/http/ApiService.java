@@ -20,7 +20,7 @@ import rx.Observable;
  */
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.2.254";
+    public static final String BASE_URL = "http://us.2thewin.com";
 
     @GET("/Match/matchmanage")
     Observable<ResponseEntity<TestBaseEntity>> getresponse(@Query("MatchId") String MatchId);
