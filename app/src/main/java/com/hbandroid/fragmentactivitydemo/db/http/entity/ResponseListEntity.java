@@ -14,65 +14,18 @@ import java.util.List;
  */
 
 public class ResponseListEntity<T> {
+
+    //请求接口成功状态吗
+    public static final int SUCCESS = 1;
+
+    public boolean success() {
+        return status == SUCCESS;
+    }
+
     private int status;
-    private int totalPages;
-    private int count;
-    private String token;
-    private String savepath;
+
     private String msg;
     private List<T> data;
-    private String money;
-    private String GameZone;
-    private String isPay;
-    public String getIsPay() {
-        return isPay;
-    }
-
-    public void setIsPay(String isPay) {
-        this.isPay = isPay;
-    }
-
-    public String getGameZone() {
-        return GameZone;
-    }
-
-    public void setGameZone(String gameZone) {
-        GameZone = gameZone;
-    }
-
-    public String getMoney() {
-        return money;
-    }
-
-    public void setMoney(String money) {
-        this.money = money;
-    }
-
-    private String followId;
-
-    public String getFollowId() {
-        return followId;
-    }
-
-    public void setFollowId(String followId) {
-        this.followId = followId;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public int getStatus() {
         return status;
@@ -96,21 +49,5 @@ public class ResponseListEntity<T> {
 
     public void setData(List<T> data) {
         this.data = data;
-    }
-
-    public String getSavepath() {
-        return savepath;
-    }
-
-    public void setSavepath(String savepath) {
-        this.savepath = savepath;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
     }
 }

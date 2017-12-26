@@ -19,13 +19,6 @@ public interface OnChangeActivityStatusListener {
 
     public void setTitle(String title);
 
-
-    public void setBottomNavagationBarVisiable(int isVisiable);
-
     public void startFragment(BaseFragment fragment);
-
-
-//    void onTbLeftClick();
-
 
 }

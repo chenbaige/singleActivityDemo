@@ -13,5 +13,6 @@ public interface IConstant {
 
     int HTTP_CONNECT_TIMEOUT=5000;
 
+    String LOG_DESC = "fragmentactivitydemo:";
 
 }

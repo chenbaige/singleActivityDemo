@@ -46,7 +46,6 @@ dependencies {
     compile 'me.yokeyword:eventbus-activity-scope:1.1.0'
 // Your EventBus's version
     compile 'org.greenrobot:eventbus:3.1.1'
-
     testCompile 'junit:junit:4.12'
 
     /*

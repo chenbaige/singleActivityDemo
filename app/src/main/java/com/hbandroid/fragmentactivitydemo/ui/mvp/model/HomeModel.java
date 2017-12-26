@@ -2,7 +2,7 @@ package com.hbandroid.fragmentactivitydemo.ui.mvp.model;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.RXResponseCompat;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestBaseEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseModel;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.contract.HomeContract;
 
@@ -25,10 +25,10 @@ public class HomeModel extends BaseModel implements HomeContract.Model {
 
     public HomeModel(ApiService mService) {
         super(mService);
-}
+    }
 
     @Override
-    public Observable<TestBaseEntity> request() {
-        return mService.getresponse("128").compose(RXResponseCompat.<TestBaseEntity>compatResult());
+    public Observable<List<User>> request() {
+        return mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
     }
 }

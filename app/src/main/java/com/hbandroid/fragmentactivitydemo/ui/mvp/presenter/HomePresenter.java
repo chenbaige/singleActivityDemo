@@ -1,20 +1,15 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.presenter;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ErrorSubscribe;
-import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ProgressDialogSubscribe;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestBaseEntity;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.ui.base.BasePresenter;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.contract.HomeContract;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.model.HomeModel;
-import com.hbandroid.fragmentactivitydemo.ui.util.ToastManager;
 
-import org.json.JSONObject;
+import java.util.List;
 
 import javax.inject.Inject;
-
-import rx.Subscriber;
 
 /**
  * Title:singleActivityDemo
@@ -37,15 +32,15 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
 
     @Override
     public void request() {
-        mModel.request().subscribe(new ErrorSubscribe<TestBaseEntity>(mActivity) {
-                @Override
-                public void onCompleted() {
+        mModel.request().subscribe(new ErrorSubscribe<List<User>>(mActivity) {
+            @Override
+            public void onCompleted() {
 
             }
 
             @Override
-            public void onNext(TestBaseEntity testEntity) {
-                mView.showOnUI(testEntity.getGameName().toString());
+            public void onNext(List<User> users) {
+                mView.showOnUI(users.get(1).getUserName() + "的电话号码是：" + users.get(1).getMobile());
             }
         });
     }

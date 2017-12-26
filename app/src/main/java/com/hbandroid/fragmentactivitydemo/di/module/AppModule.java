@@ -1,6 +1,10 @@
 package com.hbandroid.fragmentactivitydemo.di.module;
 
 
+import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
 
 import javax.inject.Singleton;
@@ -30,6 +34,13 @@ public class AppModule {
     @Provides
     public MyApp provideApplication() {
         return mApplication;
+    }
+
+    @Provides
+    @Singleton
+        // Application reference must come from AppModule.class
+    SharedPreferences providesSharedPreferences(Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
 }

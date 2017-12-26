@@ -1,12 +1,9 @@
 package com.hbandroid.fragmentactivitydemo.db.http;
 
-import com.hbandroid.fragmentactivitydemo.db.http.entity.ResponseEntity;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.ResponseListEntity;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestBaseEntity;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 
 import retrofit.http.GET;
-import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -20,8 +17,8 @@ import rx.Observable;
  */
 public interface ApiService {
 
-    public static final String BASE_URL = "http://us.2thewin.com";
+    public static final String BASE_URL = "http://192.168.31.154:8080";
 
-    @GET("/Match/matchmanage")
-    Observable<ResponseEntity<TestBaseEntity>> getresponse(@Query("MatchId") String MatchId);
+    @GET("/user/index")
+    Observable<ResponseListEntity<User>> getresponse();
 }

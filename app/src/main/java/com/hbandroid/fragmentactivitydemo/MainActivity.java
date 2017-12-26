@@ -218,11 +218,6 @@ public class MainActivity extends SupportActivity implements OnChangeActivitySta
     }
 
     @Override
-    public void setBottomNavagationBarVisiable(int isVisiable) {
-//        this.bottomNavigationBar.setVisibility(isVisiable);
-    }
-
-    @Override
     public void startFragment(BaseFragment fragment) {
         start(fragment);
     }

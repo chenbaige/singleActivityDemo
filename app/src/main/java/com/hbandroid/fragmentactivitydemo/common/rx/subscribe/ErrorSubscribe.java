@@ -1,7 +1,9 @@
 package com.hbandroid.fragmentactivitydemo.common.rx.subscribe;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.hbandroid.fragmentactivitydemo.common.constant.IConstant;
 import com.hbandroid.fragmentactivitydemo.common.exception.BaseException;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 
@@ -27,6 +29,7 @@ public abstract class ErrorSubscribe<T> extends DefaultSubscribe<T> {
 
     @Override
     public void onError(Throwable e) {
+        Log.e(IConstant.LOG_DESC, e.getMessage());
         BaseException baseException = mHandler.handleError(e);
 
         if (baseException == null) {
@@ -34,6 +37,7 @@ public abstract class ErrorSubscribe<T> extends DefaultSubscribe<T> {
         } else {
             mHandler.showMessage(baseException);
         }
+
 
     }
 }

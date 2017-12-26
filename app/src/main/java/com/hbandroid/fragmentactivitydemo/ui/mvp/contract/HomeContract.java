@@ -1,6 +1,6 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.contract;
 
-import com.hbandroid.fragmentactivitydemo.db.http.entity.TestBaseEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.ui.base.IModel;
 import com.hbandroid.fragmentactivitydemo.ui.base.IPresenter;
 import com.hbandroid.fragmentactivitydemo.ui.base.IView;
@@ -31,7 +31,7 @@ public interface HomeContract {
     }
 
     interface Model extends IModel{
-        Observable<TestBaseEntity> request();
+        Observable<List<User>> request();
     }
 
 }

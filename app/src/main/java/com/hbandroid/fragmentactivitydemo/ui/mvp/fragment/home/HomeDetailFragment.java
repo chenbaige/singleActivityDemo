@@ -1,8 +1,6 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.home;
 
 
-import android.view.View;
-
 import com.hbandroid.fragmentactivitydemo.R;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
@@ -36,7 +34,7 @@ public class HomeDetailFragment extends BaseFragment {
     @Override
     public void init() {
         mActivityStatusListener.setTitle("首页详情");
-        mActivityStatusListener.setBottomNavagationBarVisiable(View.GONE);
+//        mActivityStatusListener.setBottomNavagationBarVisiable(View.GONE);
     }
 
 }
