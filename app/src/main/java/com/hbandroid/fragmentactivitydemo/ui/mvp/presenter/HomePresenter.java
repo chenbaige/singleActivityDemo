@@ -1,6 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.presenter;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ErrorSubscribe;
+import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ProgressDialogSubscribe;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.ui.base.BasePresenter;
@@ -32,15 +33,25 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
 
     @Override
     public void request() {
-        mModel.request().subscribe(new ErrorSubscribe<List<User>>(mActivity) {
+        mModel.request().subscribe(new ProgressDialogSubscribe<List<User>>(mActivity) {
+            @Override
+            public void onNext(List<User> users) {
+
+            }
+        });
+    }
+
+    @Override
+    public void getUser() {
+        mModel.getUser(mView.getSelectUser()).subscribe(new ErrorSubscribe<User>(mActivity) {
             @Override
             public void onCompleted() {
 
             }
 
             @Override
-            public void onNext(List<User> users) {
-                mView.showOnUI(users.get(1).getUserName() + "的电话号码是：" + users.get(1).getMobile());
+            public void onNext(User user) {
+                mView.showOnUI(user.getUserName() + "的电话号码是：" + user.getMobile());
             }
         });
     }

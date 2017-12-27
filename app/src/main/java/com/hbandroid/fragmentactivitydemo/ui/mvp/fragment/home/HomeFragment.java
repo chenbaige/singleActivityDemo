@@ -60,10 +60,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         mPresenter.request();
+        mPresenter.getUser();
     }
 
     @Override
     public void showOnUI(String s) {
         mTvHomeDesc.setText(s);
+    }
+
+    @Override
+    public int getSelectUser() {
+        return 6;
     }
 }

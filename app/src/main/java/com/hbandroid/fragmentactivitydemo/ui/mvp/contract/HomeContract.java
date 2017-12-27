@@ -24,14 +24,20 @@ public interface HomeContract {
 
     interface View extends IView{
         void showOnUI(String s);
+
+        int getSelectUser();
     }
 
     interface presenter extends IPresenter<View>{
        void request();
+
+        void getUser();
     }
 
     interface Model extends IModel{
         Observable<List<User>> request();
+
+        Observable<User> getUser(int id);
     }
 
 }

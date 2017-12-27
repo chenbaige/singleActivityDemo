@@ -12,7 +12,7 @@ import org.json.JSONException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import retrofit.HttpException;
+import retrofit2.adapter.rxjava.HttpException;
 
 /**
  * Title: basicmvpframwork
