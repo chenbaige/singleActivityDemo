@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="navigation_backcolor">#181633</color>
     <color name="white">#ffffff</color>
+    <color name="spot_dialog_bgcolor">#A5DC86</color>
     <color name="navigation_back">#488c76</color>
 </resources>
