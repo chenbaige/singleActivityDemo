@@ -3,6 +3,7 @@ package com.hbandroid.fragmentactivitydemo.di.component;
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.di.module.AppModule;
 import com.hbandroid.fragmentactivitydemo.di.module.HttpModule;
 
@@ -28,6 +29,8 @@ public interface AppComponent {
     public MyApp getApplication();
 
 //    public SharedPreferences getSharedPreferences();
+
+//    public CacheUtil getCacheUtil();
 
     public RXErrorHandler getRXErrorHandler();
 

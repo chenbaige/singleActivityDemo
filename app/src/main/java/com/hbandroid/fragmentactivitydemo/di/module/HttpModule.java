@@ -6,6 +6,9 @@ import com.hbandroid.fragmentactivitydemo.common.constant.IConstant;
 import com.hbandroid.fragmentactivitydemo.common.interceptor.requestInterceptor;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheProviders;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -68,6 +71,12 @@ public class HttpModule {
     public ApiService provideApiService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
     }
+
+//    @Singleton
+//    @Provides
+//    public CacheUtil provideCacheProvicer(ApiService service) {
+//        return CacheUtil.getInstance(service);
+//    }
 
     @Singleton
     @Provides

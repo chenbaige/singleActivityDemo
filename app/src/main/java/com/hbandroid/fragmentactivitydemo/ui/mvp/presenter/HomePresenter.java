@@ -36,7 +36,8 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
         mModel.request().subscribe(new ProgressDialogSubscribe<List<User>>(mActivity) {
             @Override
             public void onNext(List<User> users) {
-
+                User user = users.get(1);
+                mView.showOnUI(user.getUserName() + "的电话号码是：" + user.getMobile());
             }
         });
     }
