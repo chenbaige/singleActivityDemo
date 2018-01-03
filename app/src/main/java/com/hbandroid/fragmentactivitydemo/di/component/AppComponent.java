@@ -30,7 +30,7 @@ public interface AppComponent {
 
 //    public SharedPreferences getSharedPreferences();
 
-//    public CacheUtil getCacheUtil();
+    public CacheUtil getCacheUtil();
 
     public RXErrorHandler getRXErrorHandler();
 

@@ -1,12 +1,12 @@
 package com.hbandroid.fragmentactivitydemo.di.module;
 
-import com.hbandroid.fragmentactivitydemo.BuildConfig;
+import android.content.Context;
+
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
 import com.hbandroid.fragmentactivitydemo.common.constant.IConstant;
 import com.hbandroid.fragmentactivitydemo.common.interceptor.requestInterceptor;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
-import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheProviders;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +16,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,6 +32,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class HttpModule {
+
+    private Context mContext;
+
+    public HttpModule(Context context) {
+        mContext = context;
+    }
 
     @Provides
     @Singleton
@@ -72,11 +77,11 @@ public class HttpModule {
         return retrofit.create(ApiService.class);
     }
 
-//    @Singleton
-//    @Provides
-//    public CacheUtil provideCacheProvicer(ApiService service) {
-//        return CacheUtil.getInstance(service);
-//    }
+    @Singleton
+    @Provides
+    public CacheUtil provideCacheProvicer(ApiService service) {
+        return CacheUtil.getInstance(service,mContext);
+    }
 
     @Singleton
     @Provides

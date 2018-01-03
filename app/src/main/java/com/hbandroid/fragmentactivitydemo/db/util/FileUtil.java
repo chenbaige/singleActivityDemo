@@ -1,4 +1,4 @@
-package com.hbandroid.fragmentactivitydemo.db.local.cache;
+package com.hbandroid.fragmentactivitydemo.db.util;
 
 import android.content.Context;
 

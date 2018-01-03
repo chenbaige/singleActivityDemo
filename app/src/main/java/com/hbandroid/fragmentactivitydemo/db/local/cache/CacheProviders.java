@@ -5,6 +5,11 @@ import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.rx_cache2.DynamicKey;
+import io.rx_cache2.EvictDynamicKey;
+import io.rx_cache2.LifeCache;
+import io.rx_cache2.ProviderKey;
+import io.rx_cache2.Reply;
 import rx.Observable;
 
 /**
@@ -19,8 +24,9 @@ import rx.Observable;
  */
 
 public interface CacheProviders {
-//
-//    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-//    Observable<List<User>> getUsers(Observable<List<User>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
+
+    @ProviderKey("student")
+    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
+    Observable<Reply<List<User>>> getUsers(Observable<List<User>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 
 }

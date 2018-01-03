@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hbandroid.fragmentactivitydemo.R;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.di.component.DaggerFragmentComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
@@ -15,8 +16,12 @@ import com.hbandroid.fragmentactivitydemo.ui.mvp.presenter.HomePresenter;
 import com.hbandroid.fragmentactivitydemo.ui.util.RxVIewUtil;
 import com.hbandroid.fragmentactivitydemo.ui.util.ToastManager;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.rx_cache2.Reply;
+import rx.Subscriber;
 
 /**
  * Title:fragmentActivityDemo
@@ -32,6 +37,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @BindView(R.id.tv_home_desc)
     TextView mTvHomeDesc;
+
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -65,7 +71,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         RxVIewUtil.viewClick(mTvHomeDesc, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastManager.showShort(_mActivity,"click event click");
+                ToastManager.showShort(_mActivity, "click event click");
             }
         });
     }
@@ -75,6 +81,23 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         super.onLazyInitView(savedInstanceState);
 //        mPresenter.request();
 //        mPresenter.getUser();
+        mCacheUtil.getUsers(new Subscriber<Reply<List<User>>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Reply<List<User>> listReply) {
+                System.out.println(listReply.getSource());
+                System.out.println(listReply.getData().get(0).getUserName());
+            }
+        });
     }
 
     @Override

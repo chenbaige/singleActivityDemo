@@ -29,7 +29,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).httpModule(new HttpModule()).build();
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).httpModule(new HttpModule(this)).build();
 
         // 建议在Application里初始化
         Fragmentation.builder()

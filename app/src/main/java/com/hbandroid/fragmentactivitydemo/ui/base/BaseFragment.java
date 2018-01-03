@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
@@ -48,6 +49,9 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
 
     @Inject
     protected MyApp myApp;
+
+    @Inject
+    protected CacheUtil mCacheUtil;
 
     @Inject
     protected T mPresenter;

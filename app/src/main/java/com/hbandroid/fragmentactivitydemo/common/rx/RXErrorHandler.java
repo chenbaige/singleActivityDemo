@@ -14,6 +14,7 @@ import java.net.SocketTimeoutException;
 
 import retrofit2.adapter.rxjava.HttpException;
 
+
 /**
  * Title: basicmvpframwork
  * <p/>
