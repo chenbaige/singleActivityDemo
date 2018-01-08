@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.ProgressDialogHandler;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Title: basicmvpframwork
  * <p>
@@ -17,24 +19,23 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
 
     private ProgressDialogHandler mDialogHandler;
 
+    private Disposable mDisposable;
+
 
     public ProgressDialogSubscribe(Context context) {
         super(context);
         this.mDialogHandler = new ProgressDialogHandler(context, true, this);
     }
 
-    public boolean isCancel(){
+    public boolean isCancel() {
         return true;
     }
 
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
+        this.mDisposable = d;
         mDialogHandler.showDialog();
-    }
-
-    @Override
-    public void onCompleted() {
-        mDialogHandler.dismissDialog();
+//        System.out.println(getClass().getSimpleName()+":onSubscribe");
     }
 
     @Override
@@ -44,7 +45,13 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
     }
 
     @Override
+    public void onComplete() {
+//        System.out.println(getClass().getSimpleName()+":onComplete");
+        mDialogHandler.dismissDialog();
+    }
+
+    @Override
     public void onProgressCancel() {
-        unsubscribe();
+        mDisposable.dispose();
     }
 }

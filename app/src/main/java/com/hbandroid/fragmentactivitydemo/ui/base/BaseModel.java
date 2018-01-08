@@ -1,9 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.ui.base;
 
-import android.app.Activity;
-import android.content.Context;
-
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 
 /**
  * Title:singleActivityDemo
@@ -20,7 +18,10 @@ public class BaseModel implements IModel {
 
     protected ApiService mService;
 
-    public BaseModel(ApiService mService) {
-        this.mService = mService;
+    protected CacheUtil mCacheUtil;
+
+    public BaseModel(CacheUtil cacheUtil) {
+        this.mCacheUtil = cacheUtil;
+        this.mService = cacheUtil.getService();
     }
 }

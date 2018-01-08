@@ -6,13 +6,13 @@ import android.widget.Toast;
 import com.hbandroid.fragmentactivitydemo.common.exception.ApiException;
 import com.hbandroid.fragmentactivitydemo.common.exception.BaseException;
 import com.hbandroid.fragmentactivitydemo.common.exception.ErrorMessageFactory;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import org.json.JSONException;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
-import retrofit2.adapter.rxjava.HttpException;
 
 
 /**

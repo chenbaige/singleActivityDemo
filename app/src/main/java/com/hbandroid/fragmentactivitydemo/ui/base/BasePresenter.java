@@ -3,10 +3,7 @@ package com.hbandroid.fragmentactivitydemo.ui.base;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
-import com.hbandroid.fragmentactivitydemo.ui.util.ToastManager;
-
-import javax.inject.Inject;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -32,7 +29,7 @@ public class BasePresenter<T extends IView, M extends IModel> implements IPresen
 
     protected M mModel;
 
-    public BasePresenter(ApiService apiService) {
+    public BasePresenter(CacheUtil cacheUtil) {
     }
 
     @Override

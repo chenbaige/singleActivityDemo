@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hbandroid.fragmentactivitydemo.R;
-import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.di.component.DaggerFragmentComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
@@ -16,12 +15,8 @@ import com.hbandroid.fragmentactivitydemo.ui.mvp.presenter.HomePresenter;
 import com.hbandroid.fragmentactivitydemo.ui.util.RxVIewUtil;
 import com.hbandroid.fragmentactivitydemo.ui.util.ToastManager;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.rx_cache2.Reply;
-import rx.Subscriber;
 
 /**
  * Title:fragmentActivityDemo
@@ -80,30 +75,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
 //        mPresenter.request();
-//        mPresenter.getUser();
-        mCacheUtil.getUsers(new Subscriber<Reply<List<User>>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Reply<List<User>> listReply) {
-                System.out.println(listReply.getSource());
-                System.out.println(listReply.getData().get(0).getUserName());
-            }
-        });
+        mPresenter.getUser();
     }
 
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-//        mPresenter.request();
     }
 
     @Override
@@ -113,6 +90,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public int getSelectUser() {
-        return 6;
+        return 2;
     }
 }

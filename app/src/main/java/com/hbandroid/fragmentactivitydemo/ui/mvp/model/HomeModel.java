@@ -1,14 +1,15 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.model;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.RXResponseCompat;
-import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseModel;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.contract.HomeContract;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
+import io.rx_cache2.Reply;
 
 /**
  * Title:singleActivityDemo
@@ -23,13 +24,13 @@ import rx.Observable;
 
 public class HomeModel extends BaseModel implements HomeContract.Model {
 
-    public HomeModel(ApiService mService) {
-        super(mService);
+    public HomeModel(CacheUtil cacheUtil) {
+        super(cacheUtil);
     }
 
     @Override
-    public Observable<List<User>> request() {
-        return mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
+    public Observable<Reply<List<User>>> request() {
+        return mCacheUtil.getUsers();
     }
 
     @Override

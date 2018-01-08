@@ -7,7 +7,8 @@ import com.hbandroid.fragmentactivitydemo.ui.base.IView;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
+import io.rx_cache2.Reply;
 
 /**
  * Title:singleActivityDemo
@@ -35,7 +36,7 @@ public interface HomeContract {
     }
 
     interface Model extends IModel{
-        Observable<List<User>> request();
+        io.reactivex.Observable<Reply<List<User>>> request();
 
         Observable<User> getUser(int id);
     }
