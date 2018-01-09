@@ -9,9 +9,6 @@ import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.Reply;
@@ -61,23 +58,15 @@ public class CacheUtil {
         return mInstance;
     }
 
+//    public Observable<Reply<List<User>>> getUsers() {
+//        Observable<List<User>> observable = mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
+//        return providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
+//    }
+
     public Observable<Reply<List<User>>> getUsers() {
         Observable<List<User>> observable = mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
-        return providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
+        return providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false)).compose(RXResponseCompat.<Reply<List<User>>>applyIoSchedulers());
     }
 
-    /**
-     * 插入观察者
-     *
-     * @param observable
-     * @param observer
-     * @param <T>
-     */
-    public <T> void setSubscribe(Observable<Reply<T>> observable, Observer<Reply<T>> observer) {
-        observable.subscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.newThread())//子线程访问网络
-                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
-                .subscribe(observer);
-    }
 
 }

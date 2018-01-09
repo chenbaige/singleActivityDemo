@@ -1,6 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.presenter;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ProgressDialogSubscribe;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.WeatherDto;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.ui.base.BasePresenter;
@@ -48,6 +49,16 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
             @Override
             public void onNext(User user) {
                 mView.showOnUI(user.getEmail());
+            }
+        });
+    }
+
+    @Override
+    public void getWeather() {
+        mModel.getWeather("广元").subscribe(new ProgressDialogSubscribe<WeatherDto>(mActivity) {
+            @Override
+            public void onNext(WeatherDto weatherDto) {
+                mView.showWeather(weatherDto.getData().getYesterday().getNotice());
             }
         });
     }

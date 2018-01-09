@@ -49,11 +49,6 @@ public class HttpModule {
                 .connectTimeout(IConstant.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true);
 
-//        if (BuildConfig.DEBUG) {
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            okHttpClient.addInterceptor(logging);
-//        }
         okHttpClient.addInterceptor(new requestInterceptor());
 
         return okHttpClient.build();
@@ -63,7 +58,7 @@ public class HttpModule {
     @Provides
     public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(ApiService.BASE_URL)
+                .baseUrl(IConstant.BASE_URL)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
@@ -80,7 +75,7 @@ public class HttpModule {
     @Singleton
     @Provides
     public CacheUtil provideCacheProvicer(ApiService service) {
-        return CacheUtil.getInstance(service,mContext);
+        return CacheUtil.getInstance(service, mContext);
     }
 
     @Singleton

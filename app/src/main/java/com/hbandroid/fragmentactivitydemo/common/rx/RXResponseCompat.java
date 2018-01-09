@@ -33,6 +33,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RXResponseCompat {
 
+    //retrofit 转换
     public static <T> ObservableTransformer<ResponseListEntity<T>, List<T>> compatListResult() {
         return new ObservableTransformer<ResponseListEntity<T>, List<T>>() {
             @Override
@@ -89,5 +90,20 @@ public class RXResponseCompat {
         };
     }
 
+
+//rxcache 转换
+
+    private final static ObservableTransformer ioTransformer = new ObservableTransformer() {
+        @Override
+        public ObservableSource apply(Observable upstream) {
+            return ((Observable) upstream).subscribeOn(Schedulers.io())
+                    .subscribeOn(Schedulers.newThread())//子线程访问网络
+                    .observeOn(AndroidSchedulers.mainThread());//回调到主线程
+        }
+    };
+
+    public static <T> ObservableTransformer<T, T> applyIoSchedulers() {
+        return (ObservableTransformer<T, T>) ioTransformer;
+    }
 
 }

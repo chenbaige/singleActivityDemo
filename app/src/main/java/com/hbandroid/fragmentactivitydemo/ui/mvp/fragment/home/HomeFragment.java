@@ -75,7 +75,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
 //        mPresenter.request();
-        mPresenter.getUser();
+//        mPresenter.getUser();
+        mPresenter.getWeather();
     }
 
     @Override
@@ -91,5 +92,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     public int getSelectUser() {
         return 2;
+    }
+
+    @Override
+    public void showWeather(String data) {
+        mTvHomeDesc.setText(data);
     }
 }

@@ -1,6 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.model;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.RXResponseCompat;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.WeatherDto;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseModel;
@@ -36,5 +37,10 @@ public class HomeModel extends BaseModel implements HomeContract.Model {
     @Override
     public Observable<User> getUser(int id) {
         return mService.getUser(id).compose(RXResponseCompat.<User>compatResult());
+    }
+
+    @Override
+    public Observable<WeatherDto> getWeather(String city) {
+        return mService.getWeather(city).compose(RXResponseCompat.<WeatherDto>applyIoSchedulers());
     }
 }

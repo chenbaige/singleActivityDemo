@@ -35,7 +35,6 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
     public void onSubscribe(Disposable d) {
         this.mDisposable = d;
         mDialogHandler.showDialog();
-//        System.out.println(getClass().getSimpleName()+":onSubscribe");
     }
 
     @Override
@@ -46,7 +45,6 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
 
     @Override
     public void onComplete() {
-//        System.out.println(getClass().getSimpleName()+":onComplete");
         mDialogHandler.dismissDialog();
     }
 

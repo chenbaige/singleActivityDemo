@@ -1,5 +1,6 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.contract;
 
+import com.hbandroid.fragmentactivitydemo.db.http.entity.WeatherDto;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.ui.base.IModel;
 import com.hbandroid.fragmentactivitydemo.ui.base.IPresenter;
@@ -27,18 +28,24 @@ public interface HomeContract {
         void showOnUI(String s);
 
         int getSelectUser();
+
+        void showWeather(String data);
     }
 
     interface presenter extends IPresenter<View>{
        void request();
 
         void getUser();
+
+        void getWeather();
     }
 
     interface Model extends IModel{
         io.reactivex.Observable<Reply<List<User>>> request();
 
         Observable<User> getUser(int id);
+
+        Observable<WeatherDto> getWeather(String city);
     }
 
 }
