@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
+import com.classic.common.MultipleStatusView;
+import com.hbandroid.fragmentactivitydemo.R;
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
@@ -19,6 +21,7 @@ import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityCl
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.ExtraTransaction;
@@ -39,6 +42,9 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 
 public abstract class BaseFragment<T extends IPresenter> extends Fragment implements ISupportFragment, OnFragmentHandleActivityClickListener, IView {
+
+    @BindView(R.id.multiple_status_view)
+    protected MultipleStatusView multipleStatusView;
 
     /**
      * 依赖注入的入口
@@ -77,7 +83,8 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(mContext).inflate(setContentViewId(), null, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_base, null, false);
+        LayoutInflater.from(mContext).inflate(setContentViewId(), (ViewGroup) view, true);
         //绑定fragment
         unbinder = ButterKnife.bind(this, view);
         if (null == myApp)

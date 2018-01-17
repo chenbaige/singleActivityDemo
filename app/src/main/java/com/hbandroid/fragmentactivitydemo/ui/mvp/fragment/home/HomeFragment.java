@@ -33,7 +33,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @BindView(R.id.tv_home_desc)
     TextView mTvHomeDesc;
 
-
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerFragmentComponent.builder().appComponent(appComponent).build().inject(this);
@@ -50,7 +49,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void init() {
-
+        multipleStatusView.showEmpty();
     }
 
     @OnClick(R.id.tv_home_desc)
