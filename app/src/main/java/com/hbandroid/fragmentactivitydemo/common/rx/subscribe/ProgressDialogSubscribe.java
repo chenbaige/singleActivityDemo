@@ -1,8 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.common.rx.subscribe;
 
-import android.content.Context;
-
 import com.hbandroid.fragmentactivitydemo.common.rx.ProgressDialogHandler;
+import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 
 import io.reactivex.disposables.Disposable;
 
@@ -21,10 +20,13 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
 
     private Disposable mDisposable;
 
+    private BaseFragment mFragment;
 
-    public ProgressDialogSubscribe(Context context) {
-        super(context);
-        this.mDialogHandler = new ProgressDialogHandler(context, true, this);
+
+    public ProgressDialogSubscribe(BaseFragment context) {
+        super(context.getActivity());
+        this.mFragment = context;
+        this.mDialogHandler = new ProgressDialogHandler(context.getActivity(), true, this);
     }
 
     public boolean isCancel() {
@@ -34,17 +36,30 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
     @Override
     public void onSubscribe(Disposable d) {
         this.mDisposable = d;
+        mFragment.showLoading();
         mDialogHandler.showDialog();
     }
 
     @Override
+    public void onNext(T t) {
+        if (null == t) {
+            mFragment.showEmpty();
+        } else {
+            mFragment.showContent();
+            onShowData(t);
+        }
+    }
+
+    @Override
     public void onError(Throwable e) {
+        mFragment.showError();
         mDialogHandler.dismissDialog();
         super.onError(e);
     }
 
     @Override
     public void onComplete() {
+        mFragment.showContent();
         mDialogHandler.dismissDialog();
     }
 
@@ -52,4 +67,6 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
     public void onProgressCancel() {
         mDisposable.dispose();
     }
+
+    public abstract void onShowData(T t);
 }

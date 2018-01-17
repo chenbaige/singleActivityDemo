@@ -66,6 +66,11 @@ public class NewsFragment extends BaseFragment implements ViewPager.OnPageChange
     }
 
     @Override
+    protected void onLazyRequest() {
+
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_news;
     }

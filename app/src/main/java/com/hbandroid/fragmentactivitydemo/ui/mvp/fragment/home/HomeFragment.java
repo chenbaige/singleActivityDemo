@@ -1,8 +1,6 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.home;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,6 +37,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     }
 
     @Override
+    protected void onLazyRequest() {
+        mPresenter.getWeather();
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_home;
     }
@@ -49,7 +52,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void init() {
-        multipleStatusView.showEmpty();
+//        multipleStatusView.showEmpty();
     }
 
     @OnClick(R.id.tv_home_desc)
@@ -68,14 +71,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
                 ToastManager.showShort(_mActivity, "click event click");
             }
         });
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-//        mPresenter.request();
-//        mPresenter.getUser();
-        mPresenter.getWeather();
     }
 
     @Override

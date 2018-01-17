@@ -26,6 +26,11 @@ public class ChatFragment extends BaseFragment {
     }
 
     @Override
+    protected void onLazyRequest() {
+
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_chat;
     }

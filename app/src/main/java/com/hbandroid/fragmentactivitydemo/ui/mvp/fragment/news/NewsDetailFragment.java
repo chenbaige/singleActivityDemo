@@ -31,6 +31,11 @@ public class NewsDetailFragment extends BaseFragment {
     }
 
     @Override
+    protected void onLazyRequest() {
+
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_news_detail;
     }

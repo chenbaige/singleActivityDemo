@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.classic.common.MultipleStatusView;
+import com.hbandroid.fragmentactivitydemo.MainActivity;
 import com.hbandroid.fragmentactivitydemo.R;
 import com.hbandroid.fragmentactivitydemo.app.MyApp;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
@@ -53,6 +54,8 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
      */
     protected abstract void setupActivityComponent(AppComponent appComponent);
 
+    protected abstract void onLazyRequest();
+
     @Inject
     protected MyApp myApp;
 
@@ -90,7 +93,28 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
         if (null == myApp)
             myApp = (MyApp) _mActivity.getApplication();
         setupActivityComponent(myApp.getAppComponent());
+        showLoading();
         return view;
+    }
+
+    public void showError() {
+        multipleStatusView.showError();
+    }
+
+    public void showContent() {
+        multipleStatusView.showContent();
+    }
+
+    public void showEmpty() {
+        multipleStatusView.showEmpty();
+    }
+
+    public void showLoading() {
+        multipleStatusView.showLoading();
+    }
+
+    public void showNoNetwork() {
+        multipleStatusView.showNoNetwork();
     }
 
     @Override
@@ -223,6 +247,11 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         mDelegate.onLazyInitView(savedInstanceState);
+        if (((MainActivity) mContext).isNetConnect()) {
+            onLazyRequest();
+        } else {
+            showNoNetwork();
+        }
     }
 
     /**

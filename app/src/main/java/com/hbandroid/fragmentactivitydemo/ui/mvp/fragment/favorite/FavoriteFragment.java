@@ -32,6 +32,11 @@ public class FavoriteFragment extends BaseFragment {
     }
 
     @Override
+    protected void onLazyRequest() {
+
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_favorite;
     }
