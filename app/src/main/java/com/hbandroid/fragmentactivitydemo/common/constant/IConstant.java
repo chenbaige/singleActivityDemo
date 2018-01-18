@@ -13,7 +13,7 @@ public interface IConstant {
 
     //网络请求主机地址
     String BASE_URL = "http://www.sojson.com/";
-//    String BASE_URL = "http://192.168.2.154:8080";
+//    String BASE_URL = "http://192.168.2.182:8080";
 
     //默认倒计时的时长(单位/秒)
     int TIMER_DOWN = 60;

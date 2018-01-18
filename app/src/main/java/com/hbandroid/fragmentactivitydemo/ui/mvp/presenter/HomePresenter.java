@@ -38,13 +38,8 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     public void request() {
         mModel.request().subscribe(new ProgressDialogSubscribe<Reply<List<User>>>((BaseFragment) mView) {
             @Override
-            public void onNext(Reply<List<User>> listReply) {
-                mView.showOnUI("来源:" + listReply.getSource() + "<----->" + "data:" + listReply.getData().get(0).getBirthday());
-            }
-
-            @Override
             public void onShowData(Reply<List<User>> listReply) {
-
+                mView.showOnUI("来源:" + listReply.getSource() + "<----->" + "data:" + listReply.getData().get(0).getBirthday());
             }
         });
     }
@@ -53,13 +48,8 @@ public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract
     public void getUser() {
         mModel.getUser(mView.getSelectUser()).subscribe(new ProgressDialogSubscribe<User>((BaseFragment) mView) {
             @Override
-            public void onNext(User user) {
-                mView.showOnUI(user.getEmail());
-            }
-
-            @Override
             public void onShowData(User user) {
-
+                mView.showOnUI(user.getEmail());
             }
         });
     }
