@@ -10,8 +10,9 @@ import com.hbandroid.fragmentactivitydemo.di.component.DaggerFragmentComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.contract.HomeContract;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.presenter.HomePresenter;
-import com.hbandroid.fragmentactivitydemo.ui.util.RxVIewUtil;
-import com.hbandroid.fragmentactivitydemo.ui.util.ToastManager;
+import com.hbandroid.fragmentactivitydemo.ui.util.popup.DialogPopupWindow;
+import com.hbandroid.fragmentactivitydemo.ui.util.rx.RxVIewUtil;
+import com.hbandroid.fragmentactivitydemo.ui.util.toast.ToastManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +40,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
     @Override
     protected void onLazyRequest() {
         mPresenter.getWeather();
-//        mPresenter.getUser();
     }
 
     @Override
@@ -53,7 +53,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     public void init() {
-//        multipleStatusView.showEmpty();
     }
 
     @OnClick(R.id.tv_home_desc)
@@ -65,7 +64,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 //                ToastManager.showShort(_mActivity,"begin click event");
 //            }
 //        });
-
         RxVIewUtil.viewClick(mTvHomeDesc, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
