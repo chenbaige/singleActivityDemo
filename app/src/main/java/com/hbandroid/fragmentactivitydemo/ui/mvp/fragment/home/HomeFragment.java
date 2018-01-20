@@ -38,7 +38,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
 
     @Override
     protected void onLazyRequest() {
-        mPresenter.getWeather();
+//        mPresenter.getWeather();
+        mPresenter.request();
     }
 
     @Override

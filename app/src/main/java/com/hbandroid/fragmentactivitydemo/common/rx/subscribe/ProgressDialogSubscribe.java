@@ -59,7 +59,7 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
 
     @Override
     public void onComplete() {
-        mFragment.showContent();
+//        mFragment.showContent();
         mDialogHandler.dismissDialog();
     }
 
