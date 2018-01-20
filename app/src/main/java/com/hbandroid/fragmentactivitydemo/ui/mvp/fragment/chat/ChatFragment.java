@@ -3,10 +3,19 @@ package com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.chat;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.hbandroid.fragmentactivitydemo.R;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
+import com.hbandroid.fragmentactivitydemo.ui.util.popup.DialogPopupWindow;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Title:fragmentActivityDemo
@@ -19,6 +28,9 @@ import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
  * Date：2017-12-22
  */
 public class ChatFragment extends BaseFragment {
+
+    @BindView(R.id.tv_chat)
+    TextView tvChat;
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -60,5 +72,11 @@ public class ChatFragment extends BaseFragment {
     public void onSupportVisible() {
         super.onSupportVisible();
         System.out.println(this.getClass().getName() + "调用了:onSupportVisible");
+    }
+
+    @OnClick(R.id.tv_chat)
+    public void onClick() {
+        DialogPopupWindow popupWindow = new DialogPopupWindow(_mActivity);
+        popupWindow.showPopupWindow(tvChat);
     }
 }

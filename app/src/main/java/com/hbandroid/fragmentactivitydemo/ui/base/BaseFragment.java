@@ -54,6 +54,7 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
      */
     protected abstract void setupActivityComponent(AppComponent appComponent);
 
+    //进入界面的数据请求接口
     protected abstract void onLazyRequest();
 
     @Inject
@@ -93,7 +94,12 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
         if (null == myApp)
             myApp = (MyApp) _mActivity.getApplication();
         setupActivityComponent(myApp.getAppComponent());
-        showLoading();
+        multipleStatusView.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLazyRequest();
+            }
+        });
         return view;
     }
 

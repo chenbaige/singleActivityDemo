@@ -1,4 +1,4 @@
-package com.hbandroid.fragmentactivitydemo.ui.util;
+package com.hbandroid.fragmentactivitydemo.ui.util.rx;
 
 import android.view.View;
 import android.widget.EditText;
