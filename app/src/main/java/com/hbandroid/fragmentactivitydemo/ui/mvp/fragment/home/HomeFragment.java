@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hbandroid.fragmentactivitydemo.R;
+import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ProgressDialogSubscribe;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.ResponseListEntity;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.di.component.DaggerFragmentComponent;
@@ -20,6 +22,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.rx_cache2.Reply;
 import rx.Subscriber;
 
@@ -81,10 +85,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
         super.onLazyInitView(savedInstanceState);
 //        mPresenter.request();
 //        mPresenter.getUser();
-        mCacheUtil.getUsers(new Subscriber<Reply<List<User>>>() {
+        mCacheUtil.getUsers(new Observer<Reply<ResponseListEntity<User>>>() {
             @Override
-            public void onCompleted() {
+            public void onSubscribe(Disposable d) {
 
+            }
+
+            @Override
+            public void onNext(Reply<ResponseListEntity<User>> responseListEntityReply) {
+                mTvHomeDesc.setText(responseListEntityReply.getSource() + ":" + responseListEntityReply.getData().getData().toString());
             }
 
             @Override
@@ -93,9 +102,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCon
             }
 
             @Override
-            public void onNext(Reply<List<User>> listReply) {
-                System.out.println(listReply.getSource());
-                System.out.println(listReply.getData().get(0).getUserName());
+            public void onComplete() {
+
             }
         });
     }

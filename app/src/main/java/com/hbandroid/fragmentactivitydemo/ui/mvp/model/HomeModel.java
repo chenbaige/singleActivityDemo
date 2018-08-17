@@ -29,11 +29,13 @@ public class HomeModel extends BaseModel implements HomeContract.Model {
 
     @Override
     public Observable<List<User>> request() {
-        return mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
+//        return mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
+        return null;
     }
 
     @Override
     public Observable<User> getUser(int id) {
-        return mService.getUser(id).compose(RXResponseCompat.<User>compatResult());
+//        return mService.getUser(id).compose(RXResponseCompat.<User>compatResult());
+        return null;
     }
 }

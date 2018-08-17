@@ -4,17 +4,25 @@ import android.content.Context;
 
 import com.hbandroid.fragmentactivitydemo.common.rx.RXResponseCompat;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.ResponseEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.ResponseListEntity;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.WeatherDto;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.Subject;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.Reply;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.JacksonSpeaker;
-import rx.Observable;
-import rx.Observer;
+//import rx.android.schedulers.AndroidSchedulers;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -35,7 +43,7 @@ public class CacheUtil {
 
 //    private static File cacheDirectory = FileUtil.getcacheDirectory();
 
-    private static CacheProviders providers;
+    private CacheProviders providers;
 
     private ApiService mService;
 
@@ -58,16 +66,30 @@ public class CacheUtil {
         return mInstance;
     }
 
-    public void getUsers(Observer<Reply<List<User>>> observer) {
-        Observable<List<User>> observable = mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
-        Observable<Reply<List<User>>> observableCache = providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
-        setSubscribe(observableCache, observer);
+//    public void getUsers(Observer<Reply<List<User>>> observer) {
+//        Observable<List<User>> observable = mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
+//        Observable<Reply<List<User>>> observableCache = providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
+//        setSubscribe(observableCache, observer);
+//    }
+
+    public void getUsers(Observer<Reply<ResponseListEntity<User>>> observer) {
+        Observable<ResponseListEntity<User>> observable = mService.getresponse().subscribeOn(io.reactivex.schedulers.Schedulers.io()).observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread());
+        Observable<Reply<ResponseListEntity<User>>> observableCache = providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
+//        setSubscribe(observableCache, observer);
+//        observable.subscribe(observer);
+        observableCache.subscribeOn(io.reactivex.schedulers.Schedulers.io()).observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread()).subscribe(observer);
     }
 
 //    public void getUsers(Observer<Reply<List<User>>> observer) {
 //        Observable<List<User>> observable = mService.getresponse().compose(RXResponseCompat.<User>compatListResult());
 //        Observable<Reply<List<User>>> observableCache = providers.getUsers(observable, new DynamicKey("获取用户列表"), new EvictDynamicKey(false));
 //        setSubscribe(observableCache, observer);
+//    }
+
+//    public void getWeather(Observer<WeatherDto> observer){
+//       providers.getWeather(mService.getWeather("广元"), new DynamicKey("广元"))
+//               .subscribeOn(io.reactivex.schedulers.Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//               .subscribe();
 //    }
 
     /**
@@ -78,10 +100,10 @@ public class CacheUtil {
      * @param <T>
      */
     public <T> void setSubscribe(Observable<Reply<T>> observable, Observer<Reply<T>> observer) {
-        observable.subscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.newThread())//子线程访问网络
-                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
-                .subscribe(observer);
+//        observable.subscribeOn(Scheduler)
+//                .subscribeOn(Schedulers.newThread())//子线程访问网络
+//                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
+//                .subscribe(observer);
     }
 
 }

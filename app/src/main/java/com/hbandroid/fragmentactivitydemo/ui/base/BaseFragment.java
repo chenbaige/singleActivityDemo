@@ -61,7 +61,7 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
 
     protected OnChangeActivityStatusListener mActivityStatusListener;
 
-    private Context mContext;
+    protected Context mContext;
 
     public abstract int setContentViewId();
 

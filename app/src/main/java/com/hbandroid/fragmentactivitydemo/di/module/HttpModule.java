@@ -8,6 +8,7 @@ import com.hbandroid.fragmentactivitydemo.common.interceptor.requestInterceptor;
 import com.hbandroid.fragmentactivitydemo.common.rx.RXErrorHandler;
 import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
 import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +18,6 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -49,11 +49,6 @@ public class HttpModule {
                 .connectTimeout(IConstant.HTTP_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true);
 
-//        if (BuildConfig.DEBUG) {
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//            okHttpClient.addInterceptor(logging);
-//        }
         okHttpClient.addInterceptor(new requestInterceptor());
 
         return okHttpClient.build();
@@ -65,10 +60,9 @@ public class HttpModule {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(ApiService.BASE_URL)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create());
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         return builder.build();
-
     }
 
     @Singleton
@@ -80,7 +74,7 @@ public class HttpModule {
     @Singleton
     @Provides
     public CacheUtil provideCacheProvicer(ApiService service) {
-        return CacheUtil.getInstance(service,mContext);
+        return CacheUtil.getInstance(service, mContext);
     }
 
     @Singleton

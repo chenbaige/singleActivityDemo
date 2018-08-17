@@ -1,6 +1,7 @@
 package com.hbandroid.fragmentactivitydemo.db.util;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.File;
 
@@ -22,7 +23,8 @@ public class FileUtil {
     public static File getcacheDirectory(Context context) {
         File cacheFile = null;
         File CachefileParent = context.getCacheDir();
-        String path = CachefileParent.getAbsolutePath() + "/" + context.getPackageName() + "/" + cacheFileName;
+//        String path = CachefileParent.getAbsolutePath() + "/" + context.getPackageName() + "/" + cacheFileName;
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + context.getPackageName() + "/" + cacheFileName;
         cacheFile = new File(path);
         try {
             //如果文件不存在，则创建新的文件
