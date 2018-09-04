@@ -1,9 +1,10 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.presenter;
 
-import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ErrorSubscribe;
 import com.hbandroid.fragmentactivitydemo.common.rx.subscribe.ProgressDialogSubscribe;
-import com.hbandroid.fragmentactivitydemo.db.http.ApiService;
+import com.hbandroid.fragmentactivitydemo.db.http.entity.WeatherDto;
 import com.hbandroid.fragmentactivitydemo.db.http.entity.home.User;
+import com.hbandroid.fragmentactivitydemo.db.local.cache.CacheUtil;
+import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.base.BasePresenter;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.contract.HomeContract;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.model.HomeModel;
@@ -11,6 +12,8 @@ import com.hbandroid.fragmentactivitydemo.ui.mvp.model.HomeModel;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.rx_cache2.Reply;
 
 /**
  * Title:singleActivityDemo
@@ -26,33 +29,37 @@ import javax.inject.Inject;
 public class HomePresenter extends BasePresenter<HomeContract.View, HomeContract.Model> implements HomeContract.presenter {
 
     @Inject
-    public HomePresenter(ApiService apiService) {
-        super(apiService);
-        this.mModel = new HomeModel(apiService);
+    public HomePresenter(CacheUtil cacheUtil) {
+        super(cacheUtil);
+        this.mModel = new HomeModel(cacheUtil);
     }
 
     @Override
     public void request() {
-        mModel.request().subscribe(new ProgressDialogSubscribe<List<User>>(mActivity) {
+        mModel.request().subscribe(new ProgressDialogSubscribe<Reply<List<User>>>((BaseFragment) mView) {
             @Override
-            public void onNext(List<User> users) {
-                User user = users.get(1);
-                mView.showOnUI(user.getUserName() + "的电话号码是：" + user.getMobile());
+            public void onShowData(Reply<List<User>> listReply) {
+                mView.showOnUI("来源:" + listReply.getSource() + "<----->" + "data:" + listReply.getData().get(0).getBirthday());
             }
         });
     }
 
     @Override
     public void getUser() {
-        mModel.getUser(mView.getSelectUser()).subscribe(new ErrorSubscribe<User>(mActivity) {
+        mModel.getUser(mView.getSelectUser()).subscribe(new ProgressDialogSubscribe<User>((BaseFragment) mView) {
             @Override
-            public void onCompleted() {
-
+            public void onShowData(User user) {
+                mView.showOnUI(user.getEmail());
             }
+        });
+    }
 
+    @Override
+    public void getWeather() {
+        mModel.getWeather("广元").subscribe(new ProgressDialogSubscribe<WeatherDto>((BaseFragment) mView) {
             @Override
-            public void onNext(User user) {
-                mView.showOnUI(user.getUserName() + "的电话号码是：" + user.getMobile());
+            public void onShowData(WeatherDto weatherDto) {
+                mView.showWeather(weatherDto.getData().getYesterday().getNotice());
             }
         });
     }

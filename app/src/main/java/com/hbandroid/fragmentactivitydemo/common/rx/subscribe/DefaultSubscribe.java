@@ -1,6 +1,6 @@
 package com.hbandroid.fragmentactivitydemo.common.rx.subscribe;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
 
 /**
  * Title: basicmvpframwork
@@ -11,5 +11,5 @@ import rx.Subscriber;
  * <p/>
  * Date:2017-05-24
  */
-public abstract class DefaultSubscribe<T> extends Subscriber<T> {
+public abstract class DefaultSubscribe<T> implements Observer<T> {
 }

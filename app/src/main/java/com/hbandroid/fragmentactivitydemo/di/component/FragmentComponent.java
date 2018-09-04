@@ -20,4 +20,6 @@ public interface FragmentComponent {
 
     void inject(HomeFragment fragment);
 
+//    void inject(NewsFragment fragment);
+
 }

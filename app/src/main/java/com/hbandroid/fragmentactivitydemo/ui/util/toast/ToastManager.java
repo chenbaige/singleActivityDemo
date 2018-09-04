@@ -1,4 +1,4 @@
-package com.hbandroid.fragmentactivitydemo.ui.util;
+package com.hbandroid.fragmentactivitydemo.ui.util.toast;
 
 import android.content.Context;
 import android.view.View;

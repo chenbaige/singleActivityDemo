@@ -13,6 +13,10 @@ import org.json.JSONException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4bb38b8fbd891b6d352d16ecf932baedc6cb12c9
 
 /**
  * Title: basicmvpframwork

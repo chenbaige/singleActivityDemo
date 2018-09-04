@@ -1,8 +1,9 @@
 package com.hbandroid.fragmentactivitydemo.common.rx.subscribe;
 
-import android.content.Context;
-
 import com.hbandroid.fragmentactivitydemo.common.rx.ProgressDialogHandler;
+import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Title: basicmvpframwork
@@ -17,34 +18,55 @@ public abstract class ProgressDialogSubscribe<T> extends ErrorSubscribe<T> imple
 
     private ProgressDialogHandler mDialogHandler;
 
+    private Disposable mDisposable;
 
-    public ProgressDialogSubscribe(Context context) {
-        super(context);
-        this.mDialogHandler = new ProgressDialogHandler(context, true, this);
+    private BaseFragment mFragment;
+
+
+    public ProgressDialogSubscribe(BaseFragment context) {
+        super(context.getActivity());
+        this.mFragment = context;
+        this.mDialogHandler = new ProgressDialogHandler(context.getActivity(), true, this);
     }
 
-    public boolean isCancel(){
+    public boolean isCancel() {
         return true;
     }
 
     @Override
-    public void onStart() {
+    public void onSubscribe(Disposable d) {
+        this.mDisposable = d;
+        mFragment.showLoading();
         mDialogHandler.showDialog();
     }
 
     @Override
-    public void onCompleted() {
-        mDialogHandler.dismissDialog();
+    public void onNext(T t) {
+        if (null == t) {
+            mFragment.showEmpty();
+        } else {
+            mFragment.showContent();
+            onShowData(t);
+        }
     }
 
     @Override
     public void onError(Throwable e) {
+        mFragment.showError();
         mDialogHandler.dismissDialog();
         super.onError(e);
     }
 
     @Override
-    public void onProgressCancel() {
-        unsubscribe();
+    public void onComplete() {
+//        mFragment.showContent();
+        mDialogHandler.dismissDialog();
     }
+
+    @Override
+    public void onProgressCancel() {
+        mDisposable.dispose();
+    }
+
+    public abstract void onShowData(T t);
 }

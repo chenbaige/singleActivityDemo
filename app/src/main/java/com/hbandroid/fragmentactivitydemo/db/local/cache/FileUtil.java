@@ -2,6 +2,8 @@ package com.hbandroid.fragmentactivitydemo.db.local.cache;
 
 import android.content.Context;
 
+import com.hbandroid.fragmentactivitydemo.common.constant.IConstant;
+
 import java.io.File;
 
 /**
@@ -17,12 +19,11 @@ import java.io.File;
 
 public class FileUtil {
 
-    private static String cacheFileName = "rxcache_dictionary";
-
     public static File getcacheDirectory(Context context) {
         File cacheFile = null;
         File CachefileParent = context.getCacheDir();
-        String path = CachefileParent.getAbsolutePath() + "/" + context.getPackageName() + "/" + cacheFileName;
+        //缓存目录路径 /data/data/包名/cache/包名/IConstant.cacheFileName
+        String path = CachefileParent.getAbsolutePath() + "/" + context.getPackageName() + "/" + IConstant.cacheFileName;
         cacheFile = new File(path);
         try {
             //如果文件不存在，则创建新的文件

@@ -13,8 +13,11 @@ import io.rx_cache2.EvictDynamicKey;
 import io.rx_cache2.LifeCache;
 import io.rx_cache2.ProviderKey;
 import io.rx_cache2.Reply;
+<<<<<<< HEAD
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+=======
+>>>>>>> 4bb38b8fbd891b6d352d16ecf932baedc6cb12c9
 
 /**
  * Title:singleActivityDemo

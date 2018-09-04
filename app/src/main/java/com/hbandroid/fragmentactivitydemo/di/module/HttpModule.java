@@ -58,10 +58,15 @@ public class HttpModule {
     @Provides
     public Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(ApiService.BASE_URL)
+                .baseUrl(IConstant.BASE_URL)
                 .client(okHttpClient)
+<<<<<<< HEAD
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+=======
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create());
+>>>>>>> 4bb38b8fbd891b6d352d16ecf932baedc6cb12c9
         return builder.build();
     }
 

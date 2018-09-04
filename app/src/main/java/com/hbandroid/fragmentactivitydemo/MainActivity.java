@@ -8,10 +8,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnChangeActivityStatusListener;
 import com.hbandroid.fragmentactivitydemo.ui.listener.OnFragmentHandleActivityClickListener;
-import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
 import com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.MainFragment;
+import com.hbandroid.fragmentactivitydemo.ui.util.NetUtil;
+import com.hbandroid.fragmentactivitydemo.ui.util.receiver.NetBroadcastReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +26,14 @@ import me.yokeyword.fragmentation.SupportHelper;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends SupportActivity implements OnChangeActivityStatusListener {
+public class MainActivity extends SupportActivity implements OnChangeActivityStatusListener, NetBroadcastReceiver.NetEvevt {
+
+    public static NetBroadcastReceiver.NetEvevt evevt;
+
+    /**
+     * 网络类型
+     */
+    private int netMobile;
 
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
 
@@ -58,11 +67,37 @@ public class MainActivity extends SupportActivity implements OnChangeActivitySta
         setContentView(R.layout.activity_main);
         mDelegate.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
+        evevt = this;
+        inspectNet();
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.id_content, MainFragment.newInstance());
         }
         init();
+    }
+
+    /**
+     * 初始化时判断有没有网络
+     */
+    public boolean inspectNet() {
+        this.netMobile = NetUtil.getNetWorkState(MainActivity.this);
+        return isNetConnect();
+    }
+
+    /**
+     * 判断有无网络 。
+     *
+     * @return true 有网, false 没有网络.
+     */
+    public boolean isNetConnect() {
+        if (netMobile == 1) {
+            return true;
+        } else if (netMobile == 0) {
+            return true;
+        } else if (netMobile == -1) {
+            return false;
+
+        }
+        return false;
     }
 
     private void init() {
@@ -222,4 +257,8 @@ public class MainActivity extends SupportActivity implements OnChangeActivitySta
         start(fragment);
     }
 
+    @Override
+    public void onNetChange(int netMobile) {
+        this.netMobile = netMobile;
+    }
 }

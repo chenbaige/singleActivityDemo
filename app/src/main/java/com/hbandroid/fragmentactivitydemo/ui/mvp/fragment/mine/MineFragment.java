@@ -23,6 +23,11 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    protected void onLazyRequest() {
+
+    }
+
+    @Override
     public int setContentViewId() {
         return R.layout.fragment_mine;
     }

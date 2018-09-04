@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <devlight.io.library.ntb.NavigationTabBar
+        android:id="@+id/bottomNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        app:ntb_title_mode="all"
+        app:ntb_title_size="10sp"
+        app:ntb_titled="true"/>
+
+    <!--<devlight.io.library.ntb.NavigationTabBar-->
+        <!--android:id="@+id/bottomNavigationBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:ntb_active_color="#fff"-->
+        <!--app:ntb_animation_duration="400"-->
+        <!--app:ntb_badge_bg_color="#ffff0000"-->
+        <!--app:ntb_badge_gravity="top"-->
+        <!--app:ntb_badge_position="right"-->
+        <!--app:ntb_badge_size="10sp"-->
+        <!--app:ntb_badge_title_color="#ffffffff"-->
+        <!--app:ntb_badged="false"-->
+        <!--app:ntb_bg_color="#000"-->
+        <!--app:ntb_corners_radius="10dp"-->
+        <!--app:ntb_icon_size_fraction="0.5"-->
+        <!--app:ntb_inactive_color="#000"-->
+        <!--app:ntb_scaled="true"-->
+        <!--app:ntb_swiped="true"-->
+        <!--app:ntb_tinted="true"-->
+        <!--app:ntb_title_mode="all"-->
+        <!--app:ntb_title_size="10sp"-->
+        <!--app:ntb_titled="true"/>-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationBar">
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

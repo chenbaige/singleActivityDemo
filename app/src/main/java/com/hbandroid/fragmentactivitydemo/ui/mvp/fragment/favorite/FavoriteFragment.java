@@ -1,9 +1,15 @@
 package com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.favorite;
 
 
+import android.widget.TextView;
+
 import com.hbandroid.fragmentactivitydemo.R;
 import com.hbandroid.fragmentactivitydemo.di.component.AppComponent;
 import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
+import com.hbandroid.fragmentactivitydemo.ui.mvp.fragment.NewsFragment;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Title:fragmentActivityDemo
@@ -17,8 +23,16 @@ import com.hbandroid.fragmentactivitydemo.ui.base.BaseFragment;
  */
 public class FavoriteFragment extends BaseFragment {
 
+    @BindView(R.id.tv_news)
+    TextView mTvNews;
+
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
+
+    }
+
+    @Override
+    protected void onLazyRequest() {
 
     }
 
@@ -34,5 +48,10 @@ public class FavoriteFragment extends BaseFragment {
     @Override
     public void init() {
 
+    }
+
+    @OnClick(R.id.tv_news)
+    public void onViewClicked() {
+        mActivityStatusListener.startFragment(NewsFragment.newInstance());
     }
 }
